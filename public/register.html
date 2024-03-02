@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Registration Form</title>
+    <link rel="stylesheet"
+          href="style.css">
+</head>
+
+<body>
+    <div class="main">
+        <h1>Register a traffic Voilation</h1>
+        <form action="">
+            <label for="name">Voilators Name:</label>
+            <input type="text" id="name"
+                   name="name"
+                   placeholder="Enter name" required>
+
+                   <label for="vtype">Voilation Type:</label>
+                   <select id="vtype" name="vtype" required>
+                       <option value="License">License</option>
+                       <option value="Helmet">Helmet</option>
+                       <option value="Pollution">Pollution</option>
+                   </select>
+                   <label for="driving license">Driving License:</label>
+                   <input type="text" id="driving license"
+                   name="driving license"
+                   placeholder="Enter driving license number" required>
+
+                   <label for="vehicledetails">Vehicle Details:</label>
+                   <select id="vehicledetails" name="vehicledetails" required>
+                       <option value="Car">Car</option>
+                       <option value="Bike">Bike</option>
+                       <option value="Lorry">Lorry</option>
+                   </select>
+
+
+            <label for="datentime">Date and Time:</label>
+            <input type="datentime"
+                   id="datentime" name="datentime"
+                   placeholder="Enter current Date and Time" required>
+
+
+
+
+
+            <label for="mobile">Contact:</label>
+            <input type="text" id="mobile"
+                   name="mobile"
+                   placeholder="Enter your Mobile Number" required
+                   maxlength="10">
+
+
+
+            <div class="wrap">
+                <button type="submit" onclick="solve()">
+                  Submit
+                  </button>
+            </div>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
