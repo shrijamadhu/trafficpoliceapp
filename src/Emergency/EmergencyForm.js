@@ -16,9 +16,21 @@ const EmergencyForm = ({ setIsShow }) => {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(emergency);
+    const response = await fetch("http://localhost:8081/api/v1/addEmergency", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(emergency),
+    });
+    if (response.ok) {
+      const resp = await response.json();
+      console.log(resp);
+      alert("Your Response is successfully submitted");
+      window.location = "/";
+    }
   };
 
   function handleLogin() {
@@ -27,7 +39,10 @@ const EmergencyForm = ({ setIsShow }) => {
 
   return (
     <>
-      <div style={{ background: "linear-gradient(to right, #141e23, #243b67)"}} className="w-full pt-10 pb-24  text-gray-700 flex flex-col items-center justify-center">
+      <div
+        style={{ background: "linear-gradient(to right, #141e23, #243b67)" }}
+        className="w-full pt-10 pb-24  text-gray-700 flex flex-col items-center justify-center"
+      >
         <div className="sdfdf p-10 shadow-[0_3px_10px_rgb(0,0,0,0.2)] bg-white">
           <div className="flex items-center justify-center">
             <span className="text-lg font-semibold align-middle text-center mb-10">
@@ -72,7 +87,7 @@ const EmergencyForm = ({ setIsShow }) => {
             </div>
 
             <div className="mt-5 grid grid-cols-1 gap-5">
-              <label className="whitespace-nowrap">Priority</label>
+              <label className="whitespace-nowrap">priority</label>
               <input
                 onChange={handleDetails}
                 name="priority"

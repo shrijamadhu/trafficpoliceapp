@@ -2,14 +2,22 @@ import React, { useState } from "react";
 
 const ViolationForm = ({ setIsShow }) => {
   const [violation, setViolation] = useState({
-    violatorName: "",
-    violationType: "",
-    drivingLisence: "",
-    vechileType: "",
-    vechileRegNum: "",
-    vechileColor: "",
-    ownedBy: "",
-    currentDate: "",
+    // violatorName: "",
+    // violationType: "",
+    // drivingLisence: "",
+    // vechileType: "",
+    // vechileRegNum: "",
+    // vechileColor: "",
+    // ownedBy: "",
+    // currentDate: "",
+    // location: "",
+    violatorname: "",
+    violationtype: "",
+    vechi1etype: "",
+    vechi1eregnum: "",
+    vechi1ecolor: "",
+    ownedby: "",
+    currentdate: "",
     location: "",
   });
 
@@ -23,9 +31,20 @@ const ViolationForm = ({ setIsShow }) => {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(violation);
+    const response = await fetch("http://localhost:8081/api/v1/addviolation", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(violation),
+    });
+    if (response.ok) {
+      const resp = await response.json();
+      alert("Your Response is successfully submitted");
+      window.location = "/";
+    }
   };
 
   const handleNext = () => {
@@ -38,7 +57,10 @@ const ViolationForm = ({ setIsShow }) => {
 
   return (
     <>
-      <div style={{ background: "linear-gradient(to right, #141e23, #243b67)"}} className="h-screen px-24 flex items-center justify-center bg-gradient-to-b from-transparent via-gray-800 to-transparent">
+      <div
+        style={{ background: "linear-gradient(to right, #141e23, #243b67)" }}
+        className="h-screen px-24 flex items-center justify-center bg-gradient-to-b from-transparent via-gray-800 to-transparent"
+      >
         <div className="sdfdf bg-white p-8 rounded-md shadow-lg">
           <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">
             Violation Details - Step {currentStep}
@@ -54,9 +76,9 @@ const ViolationForm = ({ setIsShow }) => {
                   </label>
                   <input
                     onChange={handleDetails}
-                    name="violatorName"
+                    name="violatorname"
                     className="input-fields"
-                    value={violation.violatorName}
+                    value={violation.violatorname}
                     type="text"
                   />
                 </div>
@@ -68,9 +90,9 @@ const ViolationForm = ({ setIsShow }) => {
                   </label>
                   <input
                     onChange={handleDetails}
-                    name="violationType"
+                    name="violationtype"
                     className="input-fields"
-                    value={violation.violationType}
+                    value={violation.violationtype}
                     type="text"
                   />
                 </div>
@@ -96,7 +118,7 @@ const ViolationForm = ({ setIsShow }) => {
                   </label>
                   <select
                     onChange={handleDetails}
-                    name="vechileType"
+                    name="vechi1etype"
                     className="select-field w-full border-1"
                   >
                     <option>Two Wheeler</option>
@@ -118,9 +140,9 @@ const ViolationForm = ({ setIsShow }) => {
                   </label>
                   <input
                     onChange={handleDetails}
-                    name="vechileRegNum"
+                    name="vechi1eregnum"
                     className="input-fields"
-                    value={violation.vechileRegNum}
+                    value={violation.vechi1eregnum}
                     type="text"
                   />
                 </div>
@@ -132,9 +154,9 @@ const ViolationForm = ({ setIsShow }) => {
                   </label>
                   <input
                     onChange={handleDetails}
-                    name="vechileColor"
+                    name="vechi1ecolor"
                     className="input-fields"
-                    value={violation.vechileColor}
+                    value={violation.vechi1ecolor}
                     type="text"
                   />
                 </div>
@@ -146,9 +168,9 @@ const ViolationForm = ({ setIsShow }) => {
                   </label>
                   <input
                     onChange={handleDetails}
-                    name="ownedBy"
+                    name="ownedby"
                     className="input-fields"
-                    value={violation.ownedBy}
+                    value={violation.ownedby}
                     type="text"
                   />
                 </div>
@@ -160,10 +182,10 @@ const ViolationForm = ({ setIsShow }) => {
                   </label>
                   <input
                     onChange={handleDetails}
-                    name="currentDate"
+                    name="currentdate"
                     className="input-fields"
-                    value={violation.currentDate}
-                    type="text"
+                    value={violation.currentdate}
+                    type="date" // Use type="date" for date inputs
                   />
                 </div>
 
@@ -183,7 +205,7 @@ const ViolationForm = ({ setIsShow }) => {
               </>
             )}
 
-            <div  className="flex justify-between">
+            <div className="flex justify-between">
               {currentStep !== 1 && (
                 <button
                   onClick={() => setCurrentStep(currentStep - 1)}

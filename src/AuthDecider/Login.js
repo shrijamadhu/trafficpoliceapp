@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-const Login = ({ setIsShow,user ,setUser }) => {
-  const [name, setName] = useState("");
+const Login = ({ setIsShow, user, setUser }) => {
+  const [username, setName] = useState("");
   const [password, setPassword] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
@@ -16,13 +16,29 @@ const Login = ({ setIsShow,user ,setUser }) => {
     setSubmitted(false);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (name === "" || password === "") {
+    const details = { username, password };
+    console.log(details);
+    try {
+      const response = await fetch("http://localhost:8081/api/v1/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(details),
+      });
+
+      if (!response.ok) {
+        throw new Error("Registration failed");
+      }
+      console.log("successfull");
+      const resp = await response.json();
+      setUser(resp);
+      console.log(resp);
+    } catch (error) {
+      console.error(error);
       setError(true);
-    } else {
-      setSubmitted(true);
-      setError(false);
     }
   };
 
@@ -64,7 +80,10 @@ const Login = ({ setIsShow,user ,setUser }) => {
         </div>
         <form>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="username"
+            >
               Username
             </label>
             <input
@@ -72,12 +91,15 @@ const Login = ({ setIsShow,user ,setUser }) => {
               id="username"
               placeholder="Username"
               onChange={handleName}
-              value={name}
+              value={username}
               type="text"
             />
           </div>
           <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="password"
+            >
               Password
             </label>
             <input

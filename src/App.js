@@ -1,35 +1,41 @@
-import './App.css'
-import AuthDecider from './AuthDecider/AuthDecider';
-import{ BrowserRouter as Router ,Routes,Route} from "react-router-dom"
-import Home from './Home';
-import EmergencyForm from './Emergency/EmergencyForm';
-import ViolationForm from './Violation/ViolationForm';
-import Navbar from './NavBar/NavBar';
-import Footer from './Footer';
-import AllProductsAdminDetails from './AllProductsAdminDetails';
-import { useState } from 'react';
-
+import React, { useState } from "react";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import AllProductsAdminDetails from "./AllProductsAdminDetails";
+import "./App.css";
+import AuthDecider from "./AuthDecider/AuthDecider";
+import EmergencyForm from "./Emergency/EmergencyForm";
+import Footer from "./Footer";
+import Home from "./Home";
+import Navbar from "./NavBar/NavBar";
+import ViolationForm from "./Violation/ViolationForm";
 
 function App() {
-    const [user,setUser] = useState(null);
-    return (
-       
+  const [user, setUser] = useState(null);
+  //   const [userN, setUserN] = useState(null);
 
+  //   if (user) {
+  //     localStorage.setItem("userDetails", userN);
+  //   }
+  //   console.log(user, "user----------");
 
-        <>
-        <Router>
-        <Navbar/>
-            <Routes>
-                <Route path='/' element={<Home/>}></Route>
-                <Route path='/violationForm' element={<ViolationForm/>}></Route>
-                <Route path='/emergencyForm' element={<EmergencyForm/>}></Route>
-                <Route path='/auth' element={<AuthDecider user={user} setUser={setUser}/>}></Route>
-                <Route path='/allrequests' element={<AllProductsAdminDetails/>}></Route>
-            </Routes>
-            <Footer/>
-        </Router>
-        </>
-    );
+  return (
+    <>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/violationForm" element={<ViolationForm />} />
+          <Route path="/emergencyForm" element={<EmergencyForm />} />
+          <Route
+            path="/auth"
+            element={<AuthDecider user={user} setUser={setUser} />}
+          />
+          <Route path="/allrequests" element={<AllProductsAdminDetails />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </>
+  );
 }
 
 export default App;
