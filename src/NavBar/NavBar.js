@@ -1,13 +1,46 @@
 import React from "react";
+import { FaHome, FaInfoCircle, FaBriefcase, FaEnvelope } from "react-icons/fa";
+import {Link} from "react-router-dom"
+const Navbar = () => {
+  return (
+    <div style={{ background: "linear-gradient(to right, #141e23, #243b67)",borderBottomColor:'gray',borderBottom:'2px solid gray' }} className="w-full bg-gradient-to-r  p-4 py-8">
+      <div className="container mx-auto flex justify-between items-center">
+        {/* Logo */}
+        <div className="flex items-center space-x-2">
+          <span className="text-3xl font-extrabold text-white">🚀 Traffic Police App</span>
+          <span className="text-2xl text-pink-300">•</span>
+        </div>
+
+        {/* Navigation Links */}
+        <div className="flex space-x-6">
+          <a
+            href="#"
+            className="text-white flex items-center hover:text-pink-300 transition duration-300"
+          >
+            <FaHome className="mr-2" /> Home
+          </a>
+          <a
+            href="#"
+            className="text-white flex items-center hover:text-pink-300 transition duration-300"
+          >
+            <FaInfoCircle className="mr-2" /> About
+          </a>
+          <Link to={"/auth"}>
+          <a
+            href="#"
+            className="text-white flex items-center hover:text-pink-300 transition duration-300"
+          >
+            <FaBriefcase className="mr-2" /> Login
+          </a>
+          </Link>
 
 
-const  Navbar= ()=>{
+          
 
-  return(
-    <div className="w-full h-24 bg-white shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]">
-
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default Navbar;
